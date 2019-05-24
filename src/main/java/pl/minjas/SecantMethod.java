@@ -42,9 +42,14 @@ public class SecantMethod {
 	public class SecantResult {
 		List<Pair<Double>> secantPoints = new ArrayList<>();
 		double result;
-		
-		public List<Pair<Double>> getSecantPoints() {
-			return secantPoints;
+
+		public List<Pair<Double>> getFunctionPairs(int range) {
+			List<Pair<Double>> res = new ArrayList<>();
+			for (int i = (int) result - range; i < result + range; i++) {
+				res.add(new Pair<>((double) i, function.getValue(i)));
+			}
+			
+			return res;
 		}
 		
 		private void addSecantPoint(Pair<Double> secantPoint) {

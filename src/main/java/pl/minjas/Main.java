@@ -1,5 +1,6 @@
 package pl.minjas;
 
+import pl.minjas.chart.XYChart;
 import pl.minjas.function.Function;
 import pl.minjas.function.Polynomial;
 
@@ -62,6 +63,10 @@ public class Main {
 			SecantMethod secantMethod = new SecantMethod(function, steps);
 			SecantMethod.SecantResult result = secantMethod.getResult(4, 1);
 			System.out.println("Result: " + result.getResult());
+			
+			XYChart chart = new XYChart("ChartDrawer", "Chart", result);
+			chart.pack();
+			chart.setVisible(true);
 			
 		}
 	}
