@@ -1,6 +1,7 @@
 package pl.minjas;
 
 import pl.minjas.common.Pair;
+import pl.minjas.exception.SecantException;
 import pl.minjas.function.Function;
 
 import java.util.ArrayList;
@@ -23,16 +24,26 @@ public class SecantMethod {
 		double prePre = x1;
 		double pre = x2;
 		double now = 0;
-		for (int i = 0; i < steps; i++) {
-			if ((pre - prePre) == 0.0 || (function.getValue(pre) - function.getValue(prePre)) == 0.0) {
-				System.out.println("Calculations stopped at " + (int) (i + 1.0) + " step, because comparision to 0 is positive.");
-				break;
+		try {
+			for (int i = 0; i < steps; i++) {
+				if ((pre - prePre) == 0.0 || (function.getValue(pre) - function.getValue(prePre)) == 0.0) {
+					System.out.println("Calculations stopped at " + (int) (i + 1.0) + " step, because comparision to 0 is positive.");
+					break;
+				}
+				now = pre - function.getValue(pre) * ((pre - prePre) / (function.getValue(pre) - function.getValue(prePre)));
+				
+				System.out.println("Result " + (int) (i + 1.0) + ": " + now);
+				result.addSecantPoint(new Pair<>(now, function.getValue(now)));
+				
+				if (Math.abs(function.getValue(now)) > Math.abs(function.getValue(pre))
+						&& Math.abs(now - pre) < Math.abs(pre - prePre))
+					throw new SecantException("Distance from 0 and difference between result approximations rose!");
+					
+				prePre = pre;
+				pre = now;
 			}
-			now = pre - function.getValue(pre) * ((pre - prePre) / (function.getValue(pre) - function.getValue(prePre)));
-			System.out.println("Result " + (int) (i + 1.0) + ": " + now);
-			result.addSecantPoint(new Pair<>(now, function.getValue(now)));
-			prePre = pre;
-			pre = now;
+		} catch (SecantException e) {
+			System.out.println(e.getMessage());
 		}
 		result.setResult(now);
 		
