@@ -42,11 +42,11 @@ public class SecantMethod {
 	public class SecantResult {
 		List<Pair<Double>> secantPoints = new ArrayList<>();
 		double result;
-
+		
 		public List<Pair<Double>> getFunctionPairs(int range) {
 			List<Pair<Double>> res = new ArrayList<>();
-			for (int i = (int) result - range; i < result + range; i++) {
-				res.add(new Pair<>((double) i, function.getValue(i)));
+			for (double i = result - range; i < result + range; i += 0.5) {
+				res.add(new Pair<>(i, function.getValue(i)));
 			}
 			
 			return res;
@@ -66,9 +66,20 @@ public class SecantMethod {
 		
 		public List<Pair<Pair<Double>>> getSecants() {
 			List<Pair<Pair<Double>>> res = new ArrayList<>();
-			for (int i = 1; i < secantPoints.size() - 1; i++)
-				res.add(new Pair<>(secantPoints.get(i - 1), secantPoints.get(i)));
+			for (int i = 1; i < secantPoints.size(); i++) {
+				Function sf = getLinearFunction(secantPoints.get(i - 1), secantPoints.get(i));
+				double newBeg = secantPoints.get(i - 1).getX() - 5;
+				double newEnd = secantPoints.get(i).getX() + 5;
+				res.add(new Pair<>(new Pair<>(newBeg, sf.getValue(newBeg)), new Pair<>(newEnd, sf.getValue(newEnd))));
+			}
 			return res;
+		}
+		
+		private Function getLinearFunction(Pair<Double> p1, Pair<Double> p2) {
+			double a = (p1.getY() - p2.getY()) / (p1.getX() - p2.getX());
+			double b = p1.getY() - a * p1.getX();
+			
+			return (x) -> a * x + b;
 		}
 	}
 	
