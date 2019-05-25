@@ -2,8 +2,7 @@ package pl.minjas;
 
 import pl.minjas.chart.AxisRange;
 import pl.minjas.chart.XYChart;
-import pl.minjas.function.Function;
-import pl.minjas.function.Polynomial;
+import pl.minjas.function.*;
 
 import java.util.*;
 
@@ -40,7 +39,7 @@ public class Main {
 			do {
 				System.out.println("Choose function or insert 'x' to quit:");
 				System.out.println("1. Polynomial");
-				System.out.println("2. ");
+				System.out.println("2. Log10");
 				System.out.println("3. ");
 				System.out.println("4. ");
 				
@@ -55,7 +54,7 @@ public class Main {
 					function = createPolynomial(scanner);
 					break;
 				case "2":
-					function = null;
+					function = new Log();
 					break;
 				case "3":
 					function = null;
@@ -71,9 +70,9 @@ public class Main {
 			
 			do {
 				System.out.println("Insert x1");
-				int x1 = scanner.nextInt();
+				double x1 = scanner.nextDouble();
 				System.out.println("Insert x2");
-				int x2 = scanner.nextInt();
+				double x2 = scanner.nextDouble();
 				
 				SecantMethod.SecantResult result = secantMethod.getResult(x1, x2);
 				System.out.println("\nResult: " + result.getResult());

@@ -31,6 +31,12 @@ public class XYChart extends JFrame {
 			series1.add(pair.getX(), pair.getY());
 		dataset.addSeries(series1);
 		
+		XYSeries result = new XYSeries("Result");
+		result.add(data.getResult(), -0.5);
+		result.add(data.getResult(), 0.5);
+		dataset.addSeries(result);
+		
+		
 		List<Pair<Pair<Double>>> secants = data.getSecants();
 		for (int i = 0; i < secants.size(); i++) {
 			Pair<Pair<Double>> secant = secants.get(i);
@@ -52,7 +58,7 @@ public class XYChart extends JFrame {
 				xAxisLabel, yAxisLabel, dataset);
 		
 		XYPlot plot = chart.getXYPlot();
-		XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
+		XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer(true, false);
 		plot.setRenderer(renderer);
 		plot.setBackgroundPaint(Color.GRAY);
 
