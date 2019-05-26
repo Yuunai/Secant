@@ -92,8 +92,8 @@ public class SecantMethod {
 				Function sf = getLinearFunction(secantPoints.get(i - 1), secantPoints.get(i));
 				double x1 = secantPoints.get(i - 1).getX();
 				double x2 = secantPoints.get(i).getX();
-				double newBeg = Math.min(x1, x2) - 5;
-				double newEnd = Math.max(x1, x2) + 5;
+				double newBeg = Math.min(x1, x2) - 20;
+				double newEnd = Math.max(x1, x2) + 20;
 				res.add(new Pair<>(new Pair<>(newBeg, sf.getValue(newBeg)), new Pair<>(newEnd, sf.getValue(newEnd))));
 			}
 			return res;

@@ -4,6 +4,7 @@ import org.jfree.chart.*;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
+import org.jfree.data.Range;
 import org.jfree.data.xy.*;
 import pl.minjas.SecantMethod;
 import pl.minjas.common.Pair;
@@ -19,7 +20,10 @@ public class XYChart extends JFrame {
 		XYDataset dataset = createDataset(secantResult);
 		JFreeChart chart = createChart(dataset, chartName, axisRange);
 		ChartPanel chartPanel = new ChartPanel(chart);
-		chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
+		chartPanel.setMouseZoomable(false);
+		chartPanel.setMouseWheelEnabled(true);
+		chartPanel.setPopupMenu(null);
+		chartPanel.setPreferredSize(new java.awt.Dimension(1200, 800));
 		setContentPane(chartPanel);
 	}
 	
@@ -61,16 +65,20 @@ public class XYChart extends JFrame {
 		XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer(true, false);
 		plot.setRenderer(renderer);
 		plot.setBackgroundPaint(Color.GRAY);
+		plot.setRangePannable(true);
+		plot.setDomainPannable(true);
 
 //		Main function should be tougher
 		renderer.setSeriesPaint(0, Color.RED);
 		renderer.setSeriesStroke(0, new BasicStroke(2.0f));
 		
 		NumberAxis domain = (NumberAxis) plot.getDomainAxis();
-		domain.setRange(axisRange.xStart, axisRange.xEnd);
+		domain.setRange(new Range(axisRange.xStart, axisRange.xEnd), true, false);
+		domain.setAutoRange(false);
 //		domain.setTickUnit(TickUninew NumberTickUnit(1));
 		NumberAxis range = (NumberAxis) plot.getRangeAxis();
-		range.setRange(axisRange.yStart, axisRange.yEnd);
+		range.setRange(new Range(axisRange.yStart, axisRange.yEnd), true, false);
+		range.setAutoRange(false);
 //		range.setTickUnit(new NumberTickUnit(1));
 		
 		return chart;
