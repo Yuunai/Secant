@@ -40,8 +40,8 @@ public class Main {
 				System.out.println("Choose function or insert 'x' to quit:");
 				System.out.println("1. Polynomial");
 				System.out.println("2. Log10");
-				System.out.println("3. ");
-				System.out.println("4. ");
+				System.out.println("3. Ctg(x) - x");
+				System.out.println("4. 2^x + 1");
 				
 				choice = scanner.next();
 				if (choice.equalsIgnoreCase("x"))
@@ -57,10 +57,10 @@ public class Main {
 					function = new Log();
 					break;
 				case "3":
-					function = null;
+					function = new ctgXminusX();
 					break;
 				case "4":
-					function = null;
+					function = new TwoToXMinusOne();
 					break;
 			}
 			
