@@ -41,7 +41,7 @@ public class Main {
 				System.out.println("1. Polynomial");
 				System.out.println("2. Log10");
 				System.out.println("3. Ctg(x) - x");
-				System.out.println("4. 2^x + 1");
+				System.out.println("4. 2^x - 1");
 				
 				choice = scanner.next();
 				if (choice.equalsIgnoreCase("x"))
@@ -66,7 +66,9 @@ public class Main {
 			
 			System.out.println("How many steps?");
 			int steps = scanner.nextInt();
-			SecantMethod secantMethod = new SecantMethod(function, steps);
+			System.out.println("Precision?");
+			double precision = scanner.nextDouble();
+			SecantMethod secantMethod = new SecantMethod(function, steps, precision);
 			
 			do {
 				System.out.println("Insert x1");

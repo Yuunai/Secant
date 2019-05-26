@@ -11,12 +11,14 @@ public class SecantMethod {
 	
 	private final Function function;
 	private final int steps;
+	private final double precision;
 	private double x1;
 	private double x2;
 	
-	public SecantMethod(Function function, int steps) {
+	public SecantMethod(Function function, int steps, double precision) {
 		this.function = function;
 		this.steps = steps;
+		this.precision = precision;
 	}
 	
 	public SecantResult getResult(double x1, double x2) {
@@ -49,6 +51,10 @@ public class SecantMethod {
 				
 				prePre = pre;
 				pre = now;
+				if(Math.abs(pre - prePre) <= precision) {
+					System.out.println("Precision achieved after " + (int) (i + 1.0) + " step.");
+					break;
+				}
 			}
 		} catch (SecantException e) {
 			System.out.println(e.getMessage());
