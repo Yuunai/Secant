@@ -20,7 +20,7 @@ public class XYChart extends JFrame {
 		XYDataset dataset = createDataset(secantResult);
 		JFreeChart chart = createChart(dataset, chartName, axisRange);
 		ChartPanel chartPanel = new ChartPanel(chart);
-		chartPanel.setMouseZoomable(false);
+		chartPanel.setMouseZoomable(true);
 		chartPanel.setMouseWheelEnabled(true);
 		chartPanel.setPopupMenu(null);
 		chartPanel.setPreferredSize(new java.awt.Dimension(1200, 800));

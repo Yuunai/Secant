@@ -106,7 +106,7 @@ public class Main {
 				if (choice.equalsIgnoreCase("x"))
 					return;
 			} while (choice.equalsIgnoreCase("R"));
-			
+			return;
 		}
 	}
 	

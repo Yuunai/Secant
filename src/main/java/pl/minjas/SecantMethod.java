@@ -46,7 +46,7 @@ public class SecantMethod {
 				result.addSecantPoint(new Pair<>(now, function.getValue(now)));
 				
 				if (Math.abs(function.getValue(now)) > Math.abs(function.getValue(pre))
-						&& Math.abs(now - pre) < Math.abs(pre - prePre))
+						&& Math.abs(now - pre) > Math.abs(pre - prePre))
 					throw new SecantException("Distance from 0 and difference between result approximations rose!");
 				
 				prePre = pre;
